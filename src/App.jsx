@@ -1,13 +1,15 @@
 import './App.css'
+import KenyaMap from './KenyaMap'
 import MapComponent from './MapComponent'
 
 function App() {
 
   return (
     <>
+    <dv className="container">
     <h1>Map Analytics</h1>
-    <dv style={{with:"90%",height:"50vh"}}>
-      <MapComponent/>
+      {/* <MapComponent/> */}
+      <KenyaMap/>
     </dv>
     </>
   )
