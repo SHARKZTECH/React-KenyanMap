@@ -1,6 +1,13 @@
-.container{
-    background-color: red;
-}
 h1{
     color: red;
 }
+
+.Mombasa {
+    fill: red; 
+  }
+  .Wajir{
+    fill:blue;
+  }
+  .Homa {
+    fill: green;
+  }
