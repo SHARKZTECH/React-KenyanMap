@@ -1,28 +1,47 @@
 import React, { useEffect, useRef } from 'react';
 
 const KenyaMap = () => {
-// Create a ref to the SVG element
-const svgRef = useRef(null);
+  // Create a ref to the SVG element
+  const svgRef = useRef(null);
 
-useEffect(() => {
-  // Code to execute after component mounts
-  // and SVG element is available
-  const svgElement = svgRef.current;
-  
-  // Check if SVG element is available
-  if (svgElement) {
-    // Select all path elements within the SVG
-    const paths = svgElement.querySelectorAll('path');
+  useEffect(() => {
+    // Define your disease data (replace with actual data)
+    const diseaseData = {
+      Nairobi: 1000,
+      Kisumu: 500,
+      Mombasa: 1500,
+      // Add more regions and their reported cases
+    };
 
-    // Loop through each path element
-    paths.forEach(path => {
-      // Set fill color
-      console.log(path.className.baseVal)
-      path.style.fill = 'blue'; // Change 'blue' to your desired color
-    });
-  }
-}, []); // Empty dependency array ensures the effect runs only once after mount
+    // Define color scale based on reported cases
+    const colorScale = (cases) => {
+      if (cases < 500) return 'green'; // Low cases
+      else if (cases < 1000) return 'yellow'; // Moderate cases
+      else return 'red'; // High cases
+    };
 
+    // Code to execute after component mounts
+    // and SVG element is available
+    const svgElement = svgRef.current;
+    
+    // Check if SVG element is available
+    if (svgElement) {
+      // Select all path elements within the SVG
+      const paths = svgElement.querySelectorAll('path');
+
+      // Loop through each path element
+      paths.forEach(path => {
+        // Get the region name from className (assuming className is the region name)
+        const region = path.className.baseVal;
+        
+        // Get reported cases for the region
+        const cases = diseaseData[region] || 0;
+
+        // Set fill color based on reported cases
+        path.style.fill = colorScale(cases);
+      });
+    }
+  }, []); // Empty dependency array ensures the effect runs only once after mount
   return (
     <div>
     <h1>Kenya Map</h1>
